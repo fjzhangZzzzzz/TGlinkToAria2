@@ -37,8 +37,7 @@ def parse_proxy(proxy_str: str) -> Dict[str, Optional[str]]:
     result = {
         "scheme": parsed.scheme,
         "hostname": parsed.hostname,
-        "port": parsed.port,
-        "has_credentials": False
+        "port": int(parsed.port)
     }
     
     if parsed.username is not None:
@@ -62,6 +61,14 @@ if Var.USE_SESSION_FILE:
     if not os.path.isdir(sessions_dir):
         os.makedirs(sessions_dir)
 
+proxy_conf = None
+print("PROXY: {} - {} - {}".format(Var.PROXY, len(Var.PROXY), type(Var.PROXY)))
+if Var.PROXY:
+    proxy_conf = parse_proxy(Var.PROXY)
+    print("Use proxy: {}".format(proxy_conf))
+else:
+    print("No proxy")
+
 StreamBot = Client(
     name="WebStreamer",
     api_id=Var.API_ID,
@@ -72,7 +79,7 @@ StreamBot = Client(
     sleep_threshold=Var.SLEEP_THRESHOLD,
     workers=Var.WORKERS,
     in_memory=not Var.USE_SESSION_FILE,
-    proxy=parse_proxy(Var.PROXY) if Var.PROXY else None,
+    proxy=proxy_conf,
 )
 
 multi_clients = {}

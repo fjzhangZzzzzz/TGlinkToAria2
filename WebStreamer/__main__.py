@@ -12,7 +12,6 @@ from WebStreamer import StreamBot
 from WebStreamer.server import web_server
 from WebStreamer.bot.clients import initialize_clients
 
-
 logging.basicConfig(
     level=logging.DEBUG if Var.DEBUG else logging.INFO,
     datefmt="%d/%m/%Y %H:%M:%S",
@@ -27,8 +26,6 @@ logging.getLogger("aiohttp.web").setLevel(logging.DEBUG if Var.DEBUG else loggin
 server = web.AppRunner(web_server())
 
 loop = asyncio.get_event_loop()
-
-
 
 async def start_services():
     logging.info("Initializing Telegram Bot")
