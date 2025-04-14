@@ -1,4 +1,5 @@
 FROM python:3.9-alpine
+LABEL org.opencontainers.image.source="https://github.com/fjzhangzzzzzz/tglink2aria2"
 
 WORKDIR /app
 
