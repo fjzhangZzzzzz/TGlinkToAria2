@@ -119,3 +119,44 @@ sessions/
 *.session-journal
 .env
 test.py
+
+# Build directories
+out/
+bin/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+deps/
+third_party/
+
+# Generated files
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Test files
+*.gcda
+*.gcno
+*.gcov
+
+# Log files
+*.log
+
+# Environment files
+.env.local
+
+# Documentation
+docs/_static/
+docs/_templates/
+
+# OS specific
+.DS_Store
+Thumbs.db
