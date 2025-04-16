@@ -17,6 +17,7 @@ find_package(nlohmann_json REQUIRED)
 find_package(httplib REQUIRED)
 find_package(tgbot-cpp REQUIRED)
 find_package(dotenv REQUIRED)
+find_package(CURL REQUIRED)
 
 # Add subdirectories
 add_subdirectory(src)
@@ -28,4 +29,35 @@ endif()
 
 if(BUILD_DOCS)
     add_subdirectory(docs)
-endif() 
+endif()
+
+# Add executable
+add_executable(${PROJECT_NAME} src/main.cpp)
+
+# Add source files
+target_sources(${PROJECT_NAME} PRIVATE
+    src/vars/vars.cpp
+    src/utils/file_properties.cpp
+    src/utils/byte_streamer.cpp
+    src/server/server.cpp
+    src/utils/aria2_client.cpp
+)
+
+# Add include directories
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+# Link libraries
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    CURL::libcurl
+    spdlog::spdlog
+    nlohmann_json::nlohmann_json
+    Threads::Threads
+)
+
+# Add compile definitions
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG
+) 

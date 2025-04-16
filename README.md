@@ -57,3 +57,86 @@ RPC_TOKENS=your_aria2_rpc_token
 ## 许可证
 
 MIT License
+
+## Development
+
+### Dependencies
+
+#### Ubuntu/Debian
+```bash
+sudo apt-get update
+sudo apt-get install -y \
+    build-essential \
+    cmake \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    git
+```
+
+#### Fedora/RHEL/CentOS
+```bash
+sudo dnf install -y \
+    gcc-c++ \
+    cmake \
+    libcurl-devel \
+    openssl-devel \
+    git
+```
+
+#### Arch Linux
+```bash
+sudo pacman -S --needed \
+    base-devel \
+    cmake \
+    curl \
+    openssl \
+    git
+```
+
+### Build
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/TGlinkToAria2.git
+cd TGlinkToAria2
+
+# Create build directory
+mkdir build && cd build
+
+# Configure and build
+cmake ..
+make
+```
+
+### Docker
+
+This project provides two Docker images:
+1. `builder`: Contains all build dependencies and tools
+2. `runtime`: Minimal runtime environment with only necessary dependencies
+
+#### Build Images
+
+```bash
+# Build both images
+docker build -t tglink2aria2-builder -f docker/builder.Dockerfile .
+docker build -t tglink2aria2-runtime -f docker/runtime.Dockerfile .
+```
+
+#### Run in Docker
+
+```bash
+docker run -d \
+    --name tglink2aria2 \
+    -v /path/to/config:/app/config \
+    -v /path/to/downloads:/app/downloads \
+    ghcr.io/yourusername/tglink2aria2:latest
+```
+
+### GitHub Actions
+
+The project uses GitHub Actions to:
+1. Build the project on every push
+2. Build and push Docker images on version tags
+3. Run tests on pull requests
+
+Docker images are automatically pushed to GitHub Container Registry (ghcr.io) when a new version tag is created.
