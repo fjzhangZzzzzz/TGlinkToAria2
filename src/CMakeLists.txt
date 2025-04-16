@@ -31,6 +31,13 @@ target_include_directories(tglink2aria2
 target_link_libraries(tglink2aria2
     PRIVATE
         Threads::Threads
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        spdlog::spdlog
+        nlohmann_json::nlohmann_json
+        httplib::httplib
+        tgbot-cpp::tgbot-cpp
+        dotenv::dotenv
 )
 
 # Install targets

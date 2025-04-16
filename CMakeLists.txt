@@ -11,6 +11,12 @@ option(BUILD_DOCS "Build documentation" OFF)
 
 # Find required packages
 find_package(Threads REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(spdlog REQUIRED)
+find_package(nlohmann_json REQUIRED)
+find_package(httplib REQUIRED)
+find_package(tgbot-cpp REQUIRED)
+find_package(dotenv REQUIRED)
 
 # Add subdirectories
 add_subdirectory(src)
